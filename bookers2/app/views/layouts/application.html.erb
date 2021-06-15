@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to 'Home', books_path %> <!--Userルート確認後(マイページ画面？)-->
+      </li>
+      <li>
+        <%= link_to 'Users', about_path%><!--Userルート確認後(ユーザー一覧画面？)-->
+      </li>
+      <li>
+        <%= link_to 'Books', about_path %><!--Bookルート確認後(投稿一覧画面？)-->
+      </li>
+      <li>
+        <%= link_to 'logout', destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to 'Home', books_path %> <!--Userルート確認後(マイページ画面？)-->
+      </li>
+      <li>
+        <%= link_to 'About', about_path %> <!--homesルート確認後(views/homes内にabout.html.erb作成？)-->
+      </li>
+      <li>
+        <%= link_to 'Sign up', new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to 'login', new_user_session_path %>
+      </li>
+    <% end %>
+
+
+
+    <%= yield %>
+  </body>
+</html>

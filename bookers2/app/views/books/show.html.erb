@@ -1,0 +1,14 @@
+<h1><strong>Book detail</strong></h1>
+<table>
+  <tr>
+    <td></td> <!--プロフィール画像,ユーザーネーム挿入 attachment_image_tag... -->
+    <td><%= @book.title %></td>
+    <td><%= @book.body %></td>
+    <td>
+      <% if @book.user == current_user %>
+        <%= link_to 'Edit', edit_book_path(@book.id) %>
+        <%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+      <% end %>
+    </td>
+  </tr>
+</table>
