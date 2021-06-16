@@ -1,0 +1,15 @@
+<h1><strong>Book detail</strong></h1>
+<table>
+  <tr>
+    <td>
+      <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %><br/>
+      <%= @user.name %>
+    </td>
+    <td><%= @book.title %></td>
+    <td><%= @book.body %></td>
+    <td>
+      <a href="#">Edit</a>
+      <a href="#">Destroy</a>
+    </td>
+  </tr>
+</table>

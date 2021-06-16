@@ -1,0 +1,13 @@
+<h1><strong>User info</strong></h1>
+<%= form_with model: @user, local: true do |f| %>
+  <label for="inputName">Name</label><br/>
+  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %><br/>
+
+  <label for="inputimage">Image</label><br/>
+  <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %><br/>
+
+  <label for="inputIntroduction">Introduction</label><br/>
+  <%= f.text_area :introduction, autofoccus: true, id:"inputIntroduction" %>
+
+  <%= f.submit 'Update User' %>
+<% end %>

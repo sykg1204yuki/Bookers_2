@@ -12,20 +12,20 @@
   <body>
     <% if user_signed_in? %>
       <li>
-        <%= link_to 'Home', books_path %> <!--Userルート確認後(マイページ画面？)-->
+        <%= link_to 'Home', user_path(current_user.id) %> <!--Userルート確認後(マイページ画面？)-->
       </li>
       <li>
-        <%= link_to 'Users', about_path%><!--Userルート確認後(ユーザー一覧画面？)-->
+        <%= link_to 'Users', users_path %><!--Userルート確認後(ユーザー一覧画面？)-->
       </li>
       <li>
-        <%= link_to 'Books', about_path %><!--Bookルート確認後(投稿一覧画面？)-->
+        <%= link_to 'Books', books_path %><!--Bookルート確認後(投稿一覧画面？)-->
       </li>
       <li>
         <%= link_to 'logout', destroy_user_session_path, method: :delete %>
       </li>
     <% else %>
       <li>
-        <%= link_to 'Home', books_path %> <!--Userルート確認後(マイページ画面？)-->
+        <%= link_to 'Home', root_path %> <!--Userルート確認後(マイページ画面？)-->
       </li>
       <li>
         <%= link_to 'About', about_path %> <!--homesルート確認後(views/homes内にabout.html.erb作成？)-->
