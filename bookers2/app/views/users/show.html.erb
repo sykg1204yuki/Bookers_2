@@ -1,20 +1,6 @@
+<%= render 'users/info', user: @user %>
 
-<h1><strong>User info</strong></h1>
-<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-<table>
-  <tr>
-    <th>name</th>
-    <td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <th>introduction</th>
-    <td><%= @user.introduction %></td>
-  </tr>
-</table>
-<% if @user.id == current_user.id %>
-  <p><%= link_to 'プロフィール編集', edit_user_path(@user.id) %></p>
-<% end %>
-
+<%= render 'books/new', book: @book %>
 
 <h1><strong>Books</strong></h1>
 <table>

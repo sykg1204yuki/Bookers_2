@@ -1,7 +1,5 @@
 <h1><strong>User info</strong></h1>
-
-<!--profile_imageから画像挿入-->
-
+<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
 <table>
   <tr>
     <th>name</th>
@@ -12,5 +10,6 @@
     <td><%= user.introduction %></td>
   </tr>
 </table>
-
-<%= link_to '編集' %>
+<% if user.id == current_user.id %>
+  <p><%= link_to 'プロフィール編集', edit_user_path(user.id) %></p>
+<% end %>
