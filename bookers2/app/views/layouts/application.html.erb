@@ -4,6 +4,8 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -11,42 +13,54 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to 'Home', user_path(current_user.id) %> <!--Userルート確認後(マイページ画面？)-->
-        </li>
-        <li>
-          <%= link_to 'Users', users_path %><!--Userルート確認後(ユーザー一覧画面？)-->
-        </li>
-        <li>
-          <%= link_to 'Books', books_path %><!--Bookルート確認後(投稿一覧画面？)-->
-        </li>
-        <li>
-          <%= link_to 'logout', destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to 'Home', root_path %> <!--Userルート確認後(マイページ画面？)-->
-        </li>
-        <li>
-          <%= link_to 'About', about_path %> <!--homesルート確認後(views/homes内にabout.html.erb作成？)-->
-        </li>
-        <li>
-          <%= link_to 'Sign up', new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to 'login', new_user_session_path %>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">Bookers</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to 'Home', user_path(current_user.id), class:"fas fa-home text-light nav-link" %> <!--Userルート確認後(マイページ画面？)-->
+              </li>
+              <li>
+                <%= link_to 'Users', users_path, class:"fas fa-users text-light nav-link" %><!--Userルート確認後(ユーザー一覧画面？)-->
+              </li>
+              <li>
+                <%= link_to 'Books', books_path, class:"fas fa-book-open text-light nav-link" %><!--Bookルート確認後(投稿一覧画面？)-->
+              </li>
+              <li>
+                <%= link_to 'logout', destroy_user_session_path, method: :delete, class:"fas fa-sign-out-alt text-light nav-link" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to 'Home', root_path, class:"fas fa-home text-light nav-link" %> <!--Userルート確認後(マイページ画面？)-->
+              </li>
+              <li>
+                <%= link_to 'About', about_path, class:"fas fa-link text-light nav-link" %> <!--homesルート確認後(views/homes内にabout.html.erb作成？)-->
+              </li>
+              <li>
+                <%= link_to 'Sign up', new_user_registration_path, class:"fas fa-user-plus text-light nav-link" %>
+              </li>
+              <li>
+                <%= link_to 'login', new_user_session_path, class:"fas fa-sign-in-alt text-light nav-link" %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
+    <main>
+      <%= yield %>
+    </main>
 
-
-
-    <%= yield %>
-
-    <footer>
+    <footer class="text-center p-5">
       <p>CopyRight Infratop.inc</p>
     </footer>
   </body>
 </html>
+
