@@ -1,8 +1,10 @@
-<h1><strong>New book</strong></h1>
-<%= form_with model: book, local: true do |f| %>
-  <h4 class="mt-3">Title</h4>
-  <%= f.text_field :title %>
-  <h4 class="mt-3">Opinion</h4>
-  <%= f.text_area :body %><br/>
-  <%= f.submit 'Create Book', class:"btn btn-success my-3" %>
-<% end %>
+<div class="container mt-5">
+  <h1><strong>New book</strong></h1>
+  <%= form_with model: book, local: true do |f| %>
+    <h4 class="mt-3">Title</h4>
+    <%= f.text_field :title, class:"w-100" %>
+    <h4 class="mt-3">Opinion</h4>
+    <%= f.text_area :body, class:"w-100" %><br/>
+    <%= f.submit 'Create Book', class:"btn btn-success my-3" %>
+  <% end %>
+</div>

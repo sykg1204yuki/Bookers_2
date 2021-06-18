@@ -3,6 +3,20 @@
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
       <h1><strong>Editing book</strong></h1>
+      
+      <div class="container text-danger mt-3">
+        <% if @book.errors.any? %>
+        <div class="errors-message h3">
+          <p><%= @book.errors.count %>error prohibited this book from being saved:</p>
+        </div>
+          <% @book.errors.full_messages.each do |message| %>
+            <ul>
+              <li><%= message %></li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+      
       <%= form_with model: @book, local: true do |f| %>
         <h4 class="mt-2">Title</h4>
         <%= f.text_field :title, class:"w-100" %>

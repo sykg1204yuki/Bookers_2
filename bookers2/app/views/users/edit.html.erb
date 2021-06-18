@@ -3,6 +3,20 @@
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
       <h1><strong>User info</strong></h1>
+
+      <div class="container text-danger mt-3">
+        <% if @user.errors.any? %>
+        <div class="errors-message h2">
+          <p><%= @user.errors.count %>error prohibited this obj from being saved:</p>
+        </div>
+          <% @user.errors.full_messages.each do |message| %>
+            <ul>
+              <li><%= message %></li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+
       <%= form_with model: @user, local: true do |f| %>
         <label for="inputName" class="mt-2">Name</label><br/>
         <%= f.text_field :name, autofocus: true, class:"w-100", id:"inputName", placeholder:"名前" %><br/>
@@ -14,7 +28,7 @@
         <%= f.text_area :introduction, autofoccus: true, class:"w-100", id:"inputIntroduction" %><br/>
 
         <%= f.submit 'Update User', class:"mt-2 btn btn-secondary" %>
-        
+
       <% end %>
     </div>
     <div class="col-lg-4"></div>
