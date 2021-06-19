@@ -9,13 +9,13 @@
 <div class="container mt-3">
   <div class="row">
 
-    <div class="col-lg-4">
+    <div class="col-md-3">
       <%= render 'users/info', user: @user %>
 
-      <%= render 'books/new', book: @book %>
+      <%= render 'books/new', book: @new_book %>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-md-8 offset-md-1">
       <h1><strong>Book detail</strong></h1>
       <table class="table table-white">
         <tr>

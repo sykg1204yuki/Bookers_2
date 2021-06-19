@@ -1,4 +1,13 @@
 class BooksController < ApplicationController
+  before_action :ensure_current_user, {only: [:edit, :update]}
+
+  def ensure_current_user
+    book = Book.find(params[:id])
+        if book.user != current_user
+           redirect_to books_path
+        end
+  end
+
 
   def create
     @book = Book.new(book_params)
@@ -25,8 +34,10 @@ class BooksController < ApplicationController
 
 
   def show
-    @user = current_user
+
     @book = Book.find(params[:id])
+    @user = @book.user
+    @new_book = Book.new
 
   end
 
@@ -42,14 +53,14 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
     else
       render :edit
-      
+
     end
   end
 
   def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to books_path 
+    redirect_to books_path
 
   end
 
