@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :ensure_current_user, {only: [:edit, :update]}
+  before_action :book_all
 
   def ensure_current_user
     book = Book.find(params[:id])
@@ -7,6 +8,14 @@ class BooksController < ApplicationController
            redirect_to books_path
         end
   end
+
+      # 通常は使わない！！！
+        #attr_reader :books
+
+        #def initialize()
+          #@books = Book.all
+
+        #end
 
 
   def create
@@ -26,25 +35,27 @@ class BooksController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.all
-    @book = Book.new
+    #@books = Book.all  private以下に記述
+    #@book = Book.new
 
   end
 
 
 
   def show
-
     @book = Book.find(params[:id])
+    @post_comment = PostComment.new
     @user = @book.user
     @new_book = Book.new
 
   end
 
+
   def edit
     @book = Book.find(params[:id])
 
   end
+
 
   def update
     @book = Book.find(params[:id])
@@ -69,6 +80,12 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def book_all
+    @books = Book.all
+    @book = Book.new
+
   end
 
 

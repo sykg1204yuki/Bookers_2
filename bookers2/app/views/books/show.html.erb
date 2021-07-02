@@ -21,20 +21,87 @@
         <tr>
           <td>
             <%= link_to user_path(@book.user.id) do %>
-              <%= attachment_image_tag @book.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %><br/>
+              <%= attachment_image_tag @book.user, :profile_image,
+                  format: 'jpeg', fallback: "no_image.jpg",
+                  size: "100x100" %><br/>
               <%= @book.user.name %>
             <% end %>
           </td>
           <td><%= link_to @book.title %></td>
           <td><%= @book.body %></td>
+
+          <!--ここから、いいね機能-->
+          <td>
+            <% if @book.favorited_by?(current_user) %>
+              <p>
+                <%= link_to book_favorites_path(@book), method: :delete do %>
+                  ❤<%= @book.favorites.count %>
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to book_favorites_path(@book), method: :post do %>
+                  ♡<%= @book.favorites.count %>
+                <% end %>
+              </p>
+            <% end %>
+          </td>
+          <!--いいね機能、ここまで-->
+
+          <!--コメント数表示-->
+          <td>
+            <p>コメント数:<%= @book.post_comments.count %></p>
+          </td>
+
           <td>
             <% if @book.user == current_user %>
               <%= link_to 'Edit', edit_book_path(@book.id), class:"btn btn-success" %>
-              <%= link_to 'Destroy', book_path(@book.id), class:"btn btn-danger ml-4", method: :delete, "data-confirm" => "Are you sure?" %>
+            <% end %><br/>
+            <% if @book.user == current_user %>
+              <%= link_to 'Destroy', book_path(@book.id),
+                  class:"btn btn-danger mt-2", method: :delete, "data-confirm" => "Are you sure?" %>
             <% end %>
           </td>
         </tr>
       </table>
+
+      <!--ここからコメント機能-->
+      <div class="comments mt-3">
+        <h5>コメント一覧</h5>
+        <table class="table table-white py-2">
+          <% @book.post_comments.each do |post_comment| %>
+          <tr>
+            <td>
+              <p>
+                <%= attachment_image_tag post_comment.user, :profile_image,
+                    format:"jpeg", fallback:"no_image.jpg", size:"50x50" %>
+              </p>
+            </td>
+            <td>
+              <%= post_comment.user.name %>
+            </td>
+            <td>
+              <%= post_comment.created_at.strftime('%Y/%m/%d') %><br/>
+              <%= post_comment.comment %>
+            </td>
+            <td>
+              <% if post_comment.user == current_user %>
+                <%= link_to 'Destroy',
+                    book_post_comment_path(post_comment.book, post_comment),
+                    method: :delete, class:"btn btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="new-comment mt-3">
+        <%= form_with(model:[@book,@post_comment], local: true) do |f| %>
+          <%= f.text_area :comment, rows:'5', class:"w-75" %><br/>
+          <%= f.submit '送信' %>
+        <% end %>
+      </div>
     </div>
 
   </div>
