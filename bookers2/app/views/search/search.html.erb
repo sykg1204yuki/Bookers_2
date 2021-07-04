@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <div class="col-md-12">
+    <% if @model == 'user' %>
+    <h2><strong>Users search for '<%= @value %>'</strong></h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th><strong>Name</strong></th>
+            <th><strong>Introduction</strong></th>
+          </tr>
+        </thead>
+      <% @datas.each do |user| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag user, :profile_image, fallback:"no_image.jpg",
+                  size:"40x40" %>
+            </td>
+            <td><%= user.name %></td>
+            <td><%= user.introduction %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <% elsif @model == 'book' %>
+    <h2><strong>Books search for '<%= @value %>'</strong></h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th><strong>Title</strong></th>
+            <th><strong>Opinion</strong></th>
+          </tr>
+        </thead>
+      <% @datas.each do |book| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag book.user, :profile_image, fallback:"no_image.jpg",
+                  size:"40x40" %>
+            </td>
+            <td><%= book.title %></td>
+            <td><%= book.body %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <% end %>
+  </div>
+</div>
