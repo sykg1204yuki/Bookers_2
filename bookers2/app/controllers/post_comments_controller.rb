@@ -14,10 +14,13 @@ class PostCommentsController < ApplicationController
 
 
   def destroy
-    PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_back(fallback_location: root_path)
-
+    @book = Book.find(params[:book_id])
+    comment = @book.post_comments.find(params[:id])
+    comment.destroy
+    
   end
+  
+  
 
   private
 

@@ -40,7 +40,9 @@
 
           <!--コメント数表示-->
           <td>
-            <p>コメント数:<%= @book.post_comments.count %></p>
+            <p id ="book_<%= @book.id %>-comments-count">
+              コメント数:<%= @book.post_comments.count %>
+            </p>
           </td>
 
           <td>
@@ -58,13 +60,16 @@
       <!--ここからコメント機能-->
       <div class="comments-contsiner mt-3">
         <div class="comments-area">
-          <%= render 'post_comments/comment', book: @book %> 
+          <%= render 'post_comments/comment', book: @book %>
         </div>
         <div class="new-comment-form mt-3">
-          <%= render 'post_comments/form', {book: @book, post_comment: @post_comment} %> 
+          <%= form_with(model:[@book, @post_comment], remote: true) do |f| %>
+            <%= f.text_area :comment, rows:'5', class:"w-75" %><br/>
+            <%= f.submit '送信' %>
+          <% end %>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>

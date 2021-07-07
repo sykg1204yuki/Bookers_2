@@ -19,7 +19,7 @@
       <% if post_comment.user == current_user %>
         <%= link_to 'Destroy',
             book_post_comment_path(post_comment.book, post_comment),
-            method: :delete, class:"btn btn-danger" %>
+            method: :delete, remote: true, class:"btn btn-danger" %>
       <% end %>
     </td>
   </tr>

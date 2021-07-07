@@ -1,2 +1,3 @@
+$('#book_<%= @book.id %>-comments-count').html('コメント数:<%= @book.post_comments.count %>');
 $('.comments-area').html('<%= j(render 'post_comments/comment', book: @book) %>');
 $('textarea').val('');
